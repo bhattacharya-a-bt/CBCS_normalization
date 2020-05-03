@@ -107,7 +107,7 @@ makeRLEplot <- function(data,metadata,id){
   #### OUTPUT: ggplot2 RLE plot
   
   data = data - apply(data,1,median)
-  stack = stack(rawCommon)
+  stack = stack(data)
   colnames(stack)[1] = id
   stackPlot = merge(stack,metadata,by=id)
   colnames(stackPlot)[1:2] = c('Sample','values')
