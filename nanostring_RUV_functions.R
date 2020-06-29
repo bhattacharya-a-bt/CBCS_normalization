@@ -1,4 +1,4 @@
-RUV_total <- function(raw,pData,fData,k,exclude = NULL){
+RUV_total <- function(raw,pData,fData,k,hkgenes = NULL,exclude = NULL){
   
   ### INPUT: raw - p x n raw expressions with p genes and n samples
   ###        pData - phenotype metadata across samples
@@ -10,6 +10,12 @@ RUV_total <- function(raw,pData,fData,k,exclude = NULL){
   library(DESeq2)
   library(limma)
   library(matrixStats)
+	
+  if (!is.null(hkgenes)){
+	  
+  fData(set)$Class[rownames(set) %in% hkgenes] = 'Housekeeping'
+	  
+	  }
   
   fData = fData[rownames(raw),]
   int = intersect(rownames(raw),rownames(fData))
